@@ -1,0 +1,6 @@
+#ifndef LIBCHATGPT_LIBRARY_H
+#define LIBCHATGPT_LIBRARY_H
+
+void hello();
+
+#endif //LIBCHATGPT_LIBRARY_H
