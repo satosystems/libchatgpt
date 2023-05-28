@@ -6,5 +6,5 @@ set(CMAKE_CXX_STANDARD 23)
 find_package(CURL REQUIRED)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib/nlohmann/json/include" ${CURL_INCLUDE_DIR})
 
-add_library(chatgpt library.cpp)
+add_library(chatgpt chatgpt.cpp)
 target_link_libraries(chatgpt ${CURL_LIBRARIES})
