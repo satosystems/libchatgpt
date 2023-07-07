@@ -11,9 +11,17 @@ typedef enum {
     chatgpt_callback_kind_stop,
 } chatgpt_callback_kind;
 
+#define chatgpt_role_system "system"
+#define chatgpt_role_user "user"
+
+typedef struct {
+    const char *role;
+    const char *content;
+} chatgpt_message;
+
 typedef void (* chatgpt_callback)(const chatgpt_callback_kind kind, const char *s);
 
-void chatgpt_completions(const char *api_key, chatgpt_callback cb);
+void chatgpt_completions(const char *api_key, int length, chatgpt_message messages[], chatgpt_callback cb);
 
 #ifdef __cplusplus
 }

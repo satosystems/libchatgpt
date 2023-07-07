@@ -53,7 +53,7 @@ static size_t write_callback(char *ptr, size_t size, size_t nmemb, void *clientp
     return data_length;
 }
 
-void chatgpt_completions(const char *api_key, const char *content, chatgpt_callback cb) {
+void chatgpt_completions(const char *api_key, int length, chatgpt_message messages[], chatgpt_callback cb) {
     curl_global_init(CURL_GLOBAL_ALL);
     CURL *curl = curl_easy_init();
 
@@ -81,8 +81,10 @@ void chatgpt_completions(const char *api_key, const char *content, chatgpt_callb
     json j;
     j["model"] = "gpt-3.5-turbo";
     j["stream"] = true;
-    j["messages"][0]["role"] = "user";
-    j["messages"][0]["content"] = content;
+    for (int i = 0; i < length; i++) {
+        j["messages"][i]["role"] = messages[i].role;
+        j["messages"][i]["content"] = messages[i].content;
+    }
     const std::string js = j.dump();
 
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, js.c_str());
