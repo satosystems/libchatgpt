@@ -19,9 +19,9 @@ typedef struct {
     const char *content;
 } chatgpt_message;
 
-typedef void (* chatgpt_callback)(const chatgpt_callback_kind kind, const char *s);
+typedef void (* chatgpt_callback)(const chatgpt_callback_kind kind, const char *s, void *param);
 
-void chatgpt_completions(const char *api_key, int length, chatgpt_message messages[], chatgpt_callback cb);
+void chatgpt_completions(const char *api_key, int length, chatgpt_message messages[], chatgpt_callback cb, void *param = nullptr);
 
 #ifdef __cplusplus
 }
